@@ -1,0 +1,441 @@
+RAM size: 2048 bytes
+Swap size: 16777216 bytes
+Cores: 4 cores
+Time slot 0
+Time slot 0
+Time slot 1
+Time slot 1
+ Loaded process 1 with priority 130.
+Time slot 0
+ CPU 2: Process 1 is being run.
+ CPU 2: CALC instruction executed on process 1.
+Time slot 1
+ CPU 2: Time quantum expired for process 1.
+ CPU 2: Process 1 is being run.
+ Process 1: Allocated 512 bytes (2 pages) at address 0x0 of region 0
+ Process 1: 
+ +--------- PGD ---------+
+ | 00000000:  0x80000000 |
+ | 00000004:  0x80000001 |
+ +-----------------------+
+ | Page   0 -> Frame   0 |
+ | Page   1 -> Frame   1 |
+ +-----------------------+
+Time slot 2
+ Loaded process 2 with priority 39.
+ CPU 2: Time quantum expired for process 1.
+ CPU 2: Process 2 is being run.
+ CPU 2: CALC instruction executed on process 2.
+ CPU 2: Time quantum expired for process 2.
+Time slot 3
+ CPU 3: Process 1 is being run.
+ Process 1: Allocated 512 bytes (2 pages) at address 0x200 of region 0
+ CPU 2: Process 2 is being run.
+ CPU 2: CALC instruction executed on process 2.
+ Process 1: 
+ +--------- PGD ---------+
+ | 00000000:  0x80000000 |
+ | 00000004:  0x80000001 |
+ | 00000008:  0x80000002 |
+ | 00000012:  0x80000003 |
+ +-----------------------+
+ | Page   0 -> Frame   0 |
+ | Page   1 -> Frame   1 |
+ | Page   2 -> Frame   2 |
+ | Page   3 -> Frame   3 |
+ +-----------------------+
+ CPU 3: Time quantum expired for process 1.
+ CPU 2: Time quantum expired for process 2.
+Time slot 4
+ Loaded process 3 with priority 15.
+ CPU 0: Process 2 is being run.
+ CPU 0: CALC instruction executed on process 2.
+ CPU 3: Process 1 is being run.
+ Process 1: Freed 512 bytes (2 pages) at address 0x0 of region 0
+ Process 1: 
+ +--------- PGD ---------+
+ | 00000008:  0x80000002 |
+ | 00000012:  0x80000003 |
+ +-----------------------+
+ | Page   2 -> Frame   2 |
+ | Page   3 -> Frame   3 |
+ +-----------------------+
+ CPU 2: Process 3 is being run.
+Time slot 5
+ CPU 0: Time quantum expired for process 2.
+ CPU 0: Process 2 is being run.
+ Process 3: Allocated 512 bytes (2 pages) at address 0x0 of region 0
+ CPU 0: CALC instruction executed on process 2.
+ Process 3: 
+ +--------- PGD ---------+
+ | 00000000:  0x80000004 |
+ | 00000004:  0x80000005 |
+ +-----------------------+
+ | Page   0 -> Frame   4 |
+ | Page   1 -> Frame   5 |
+ +-----------------------+
+ CPU 3: Time quantum expired for process 1.
+Time slot 6
+ CPU 2: Time quantum expired for process 3.
+ CPU 3: Process 1 is being run.
+ CPU 0: Time quantum expired for process 2.
+ CPU 0: Process 2 is being run.
+ Loaded process 4 with priority 120.
+ Process 1: Allocated 256 bytes (1 pages) at address 0x0 of region 0
+ CPU 0: CALC instruction executed on process 2.
+ Process 1: 
+ +--------- PGD ---------+
+ | 00000000:  0x80000006 |
+ | 00000008:  0x80000002 |
+ | 00000012:  0x80000003 |
+ +-----------------------+
+ | Page   0 -> Frame   6 |
+ | Page   2 -> Frame   2 |
+ | Page   3 -> Frame   3 |
+ +-----------------------+
+ CPU 2: Process 4 is being run.
+ CPU 2: CALC instruction executed on process 4.
+ CPU 2: Time quantum expired for process 4.
+ CPU 3: Time quantum expired for process 1.
+Time slot 8
+Time slot 8
+ CPU 0: Time quantum expired for process 2.
+ CPU 1: Process 1 is being run.
+ CPU 3: Process 3 is being run.
+ Process 3: Allocated 256 bytes (1 pages) at address 0x200 of region 0
+ CPU 2: Process 4 is being run.
+ Loaded process 5 with priority 120.
+ CPU 2: CALC instruction executed on process 4.
+ Process 1: Write to region 1, offset 20 value 100
+ Process 3: 
+ +--------- PGD ---------+
+ | 00000000:  0x80000004 |
+ | 00000004:  0x80000005 |
+ | 00000008:  0x80000007 |
+ +-----------------------+
+ | Page   0 -> Frame   4 |
+ | Page   1 -> Frame   5 |
+ | Page   2 -> Frame   7 |
+ +-----------------------+
+ CPU 0: Process 2 is being run.
+ CPU 0: CALC instruction executed on process 2.
+ CPU 3: Time quantum expired for process 3.
+ CPU 2: Time quantum expired for process 4.
+ CPU 1: Time quantum expired for process 1.
+ CPU 0: Time quantum expired for process 2.
+ CPU 0: Process 2 is being run.
+ CPU 2: Process 5 is being run.
+ CPU 0: CALC instruction executed on process 2.
+Time slot 10
+Time slot 10
+ Process 5: Allocated 512 bytes (2 pages) at address 0x0 of region 0
+ CPU 3: Process 4 is being run.
+ CPU 1: Process 1 is being run.
+ CPU 3: CALC instruction executed on process 4.
+ Process 1: Read from region 1, offset 20: 100
+ Process 5: 
+ +--------- PGD ---------+
+ | 00000000:  0x80000000 |
+ | 00000004:  0x80000001 |
+ +-----------------------+
+ | Page   0 -> Frame   0 |
+ | Page   1 -> Frame   1 |
+ +-----------------------+
+ Loaded process 6 with priority 15.
+ CPU 2: Time quantum expired for process 5.
+ CPU 1: Time quantum expired for process 1.
+Time slot 11
+ CPU 1: Process 3 is being run.
+ CPU 0: Time quantum expired for process 2.
+ CPU 2: Process 5 is being run.
+ CPU 0: Process 1 is being run.
+ Process 3: Freed 512 bytes (2 pages) at address 0x0 of region 0
+ Process 5: Allocated 256 bytes (1 pages) at address 0x200 of region 0
+ Process 1: Write to region 2, offset 20 value 102
+ Process 3: 
+ +--------- PGD ---------+
+ | 00000008:  0x80000007 |
+ +-----------------------+
+ | Page   2 -> Frame   7 |
+ +-----------------------+
+ Process 5: 
+ +--------- PGD ---------+
+ | 00000000:  0x80000000 |
+ | 00000004:  0x80000001 |
+ | 00000008:  0x80000004 |
+ +-----------------------+
+ | Page   0 -> Frame   0 |
+ | Page   1 -> Frame   1 |
+ | Page   2 -> Frame   4 |
+ +-----------------------+
+ Loaded process 7 with priority 38.
+ CPU 3: Time quantum expired for process 4.
+ CPU 3: Process 6 is being run.
+ CPU 3: CALC instruction executed on process 6.
+ CPU 3: Time quantum expired for process 6.
+ CPU 2: Time quantum expired for process 5.
+Time slot 12
+ CPU 1: Time quantum expired for process 3.
+ CPU 3: Process 7 is being run.
+ CPU 2: Process 2 is being run.
+ CPU 3: CALC instruction executed on process 7.
+ CPU 2: CALC instruction executed on process 2.
+ CPU 1: Process 4 is being run.
+ CPU 1: CALC instruction executed on process 4.
+ CPU 0: Time quantum expired for process 1.
+ CPU 0: Process 1 is being run.
+ Process 1: Read from region 2, offset 20: 102
+Time slot 13
+ CPU 3: Time quantum expired for process 7.
+ CPU 1: Time quantum expired for process 4.
+ CPU 0: Time quantum expired for process 1.
+ CPU 2: Time quantum expired for process 2.
+ CPU 1: Process 7 is being run.
+ CPU 3: Process 6 is being run.
+ CPU 3: CALC instruction executed on process 6.
+ CPU 0: Process 5 is being run.
+ CPU 2: Process 2 is being run.
+ CPU 2: CALC instruction executed on process 2.
+ CPU 1: CALC instruction executed on process 7.
+ Process 5: Freed 512 bytes (2 pages) at address 0x0 of region 0
+ Process 5: 
+ +--------- PGD ---------+
+ | 00000008:  0x80000004 |
+ +-----------------------+
+ | Page   2 -> Frame   4 |
+ +-----------------------+
+ CPU 2: Time quantum expired for process 2.
+Time slot 14
+ CPU 3: Time quantum expired for process 6.
+ CPU 1: Time quantum expired for process 7.
+ CPU 0: Time quantum expired for process 5.
+ CPU 3: Process 1 is being run.
+ CPU 0: Process 3 is being run.
+ CPU 2: Process 2 is being run.
+ Process 1: Write to region 3, offset 20 value 103
+ CPU 2: CALC instruction executed on process 2.
+ CPU 1: Process 4 is being run.
+ CPU 1: CALC instruction executed on process 4.
+ Process 3: Allocated 256 bytes (1 pages) at address 0x0 of region 0
+ Process 3: 
+ +--------- PGD ---------+
+ | 00000000:  0x80000005 |
+ | 00000008:  0x80000007 |
+ +-----------------------+
+ | Page   0 -> Frame   5 |
+ | Page   2 -> Frame   7 |
+ +-----------------------+
+ CPU 2: Time quantum expired for process 2.
+ CPU 3: Time quantum expired for process 1.
+Time slot 15
+ CPU 3: Process 1 is being run.
+ CPU 1: Time quantum expired for process 4.
+ CPU 0: Time quantum expired for process 3.
+ CPU 2: Process 6 is being run.
+ CPU 1: Process 7 is being run.
+ CPU 0: Process 2 is being run.
+ Process 1: Read from region 3, offset 20: 103
+ CPU 2: CALC instruction executed on process 6.
+ CPU 1: CALC instruction executed on process 7.
+ CPU 0: CALC instruction executed on process 2.
+ CPU 2: Time quantum expired for process 6.
+ CPU 3: Time quantum expired for process 1.
+ CPU 1: Time quantum expired for process 7.
+ CPU 3: Process 5 is being run.
+Time slot 16
+ CPU 0: Time quantum expired for process 2.
+ CPU 1: Process 1 is being run.
+ CPU 1: CALC instruction executed on process 1.
+ CPU 2: Process 7 is being run.
+ CPU 2: CALC instruction executed on process 7.
+ Process 5: Allocated 256 bytes (1 pages) at address 0x0 of region 0
+ CPU 0: Process 3 is being run.
+ Process 5: 
+ +--------- PGD ---------+
+ | 00000000:  0x80000000 |
+ | 00000008:  0x80000004 |
+ +-----------------------+
+ | Page   0 -> Frame   0 |
+ | Page   2 -> Frame   4 |
+ +-----------------------+
+ Process 3: Freed 256 bytes (1 pages) at address 0x0 of region 0
+ Loaded process 8 with priority 0.
+ Process 3: 
+ +--------- PGD ---------+
+ | 00000008:  0x80000007 |
+ +-----------------------+
+ | Page   2 -> Frame   7 |
+ +-----------------------+
+ CPU 2: Time quantum expired for process 7.
+ CPU 3: Time quantum expired for process 5.
+ CPU 2: Process 2 is being run.
+ CPU 2: Finished running process 2.
+Time slot 17
+ CPU 2: Process 8 is being run.
+ CPU 3: Process 4 is being run.
+ CPU 2: CALC instruction executed on process 8.
+ CPU 1: Time quantum expired for process 1.
+ CPU 3: CALC instruction executed on process 4.
+ CPU 1: Process 6 is being run.
+ CPU 1: CALC instruction executed on process 6.
+ CPU 0: Time quantum expired for process 3.
+ CPU 0: Process 7 is being run.
+ CPU 0: CALC instruction executed on process 7.
+ CPU 2: Time quantum expired for process 8.
+ CPU 1: Time quantum expired for process 6.
+Time slot 18
+ CPU 1: Process 5 is being run.
+ Process 5: Write to region 1, offset 20 value 102
+ CPU 3: Time quantum expired for process 4.
+ CPU 2: Process 1 is being run.
+ CPU 3: Process 8 is being run.
+ CPU 3: CALC instruction executed on process 8.
+ CPU 0: Time quantum expired for process 7.
+ CPU 0: Process 3 is being run.
+ Process 1: Freed 512 bytes (2 pages) at address 0x200 of region 0
+ Process 1: 
+ +--------- PGD ---------+
+ | 00000000:  0x80000006 |
+ +-----------------------+
+ | Page   0 -> Frame   6 |
+ +-----------------------+
+ Process 3: Freed 256 bytes (1 pages) at address 0x200 of region 0
+ Process 3: 
+ +--------- PGD ---------+
+ +-----------------------+
+ +-----------------------+
+Time slot 19
+ CPU 2: Time quantum expired for process 1.
+ CPU 2: Process 7 is being run.
+ CPU 1: Time quantum expired for process 5.
+ CPU 2: CALC instruction executed on process 7.
+ CPU 0: Time quantum expired for process 3.
+ CPU 3: Time quantum expired for process 8.
+ CPU 1: Process 4 is being run.
+ CPU 3: Process 1 is being run.
+ CPU 1: CALC instruction executed on process 4.
+ CPU 3: CALC instruction executed on process 1.
+ CPU 0: Process 8 is being run.
+ CPU 0: CALC instruction executed on process 8.
+ CPU 3: Time quantum expired for process 1.
+ CPU 3: Process 6 is being run.
+ CPU 3: CALC instruction executed on process 6.
+Time slot 20
+ CPU 2: Time quantum expired for process 7.
+ CPU 2: Process 7 is being run.
+ CPU 2: CALC instruction executed on process 7.
+ CPU 1: Time quantum expired for process 4.
+ CPU 1: Process 5 is being run.
+ Process 5: Write to region 2, offset 1000 value 1
+ CPU 0: Time quantum expired for process 8.
+ CPU 0: Process 1 is being run.
+ CPU 0: Finished running process 1.
+ CPU 0: Process 8 is being run.
+ CPU 0: CALC instruction executed on process 8.
+ CPU 3: Time quantum expired for process 6.
+Time slot 21
+ CPU 2: Time quantum expired for process 7.
+ CPU 1: Time quantum expired for process 5.
+ CPU 2: Process 3 is being run.
+ CPU 0: Time quantum expired for process 8.
+ CPU 2: Finished running process 3.
+ CPU 3: Process 6 is being run.
+ CPU 1: Process 7 is being run.
+ CPU 3: CALC instruction executed on process 6.
+ CPU 0: Process 5 is being run.
+ CPU 0: Finished running process 5.
+ CPU 0: Process 8 is being run.
+ CPU 1: CALC instruction executed on process 7.
+ CPU 0: CALC instruction executed on process 8.
+ CPU 2: Process 4 is being run.
+ CPU 2: CALC instruction executed on process 4.
+ CPU 2: Time quantum expired for process 4.
+Time slot 22
+ CPU 3: Time quantum expired for process 6.
+ CPU 1: Time quantum expired for process 7.
+ CPU 3: Process 6 is being run.
+ CPU 0: Time quantum expired for process 8.
+ CPU 3: CALC instruction executed on process 6.
+ CPU 0: Process 4 is being run.
+ CPU 1: Process 8 is being run.
+ CPU 1: CALC instruction executed on process 8.
+ CPU 2: Process 7 is being run.
+ CPU 2: CALC instruction executed on process 7.
+ CPU 0: CALC instruction executed on process 4.
+ CPU 3: Time quantum expired for process 6.
+ CPU 2: Time quantum expired for process 7.
+Time slot 23
+ CPU 1: Time quantum expired for process 8.
+ CPU 2: Process 7 is being run.
+ CPU 2: CALC instruction executed on process 7.
+ CPU 0: Time quantum expired for process 4.
+ CPU 0: Process 4 is being run.
+ CPU 3: Process 8 is being run.
+ CPU 0: CALC instruction executed on process 4.
+ CPU 3: CALC instruction executed on process 8.
+ CPU 1: Process 6 is being run.
+ CPU 1: CALC instruction executed on process 6.
+ CPU 3: Time quantum expired for process 8.
+ CPU 2: Time quantum expired for process 7.
+ CPU 3: Process 8 is being run.
+ CPU 2: Process 7 is being run.
+ CPU 2: CALC instruction executed on process 7.
+Time slot 25
+ CPU 0: Time quantum expired for process 4.
+ CPU 3: Finished running process 8.
+ CPU 0: Process 4 is being run.
+Time slot 25
+ CPU 1: Time quantum expired for process 6.
+ CPU 3: stopped.
+ CPU 1: Process 6 is being run.
+ CPU 1: CALC instruction executed on process 6.
+ CPU 0: CALC instruction executed on process 4.
+Time slot 26
+ CPU 2: Time quantum expired for process 7.
+ CPU 1: Time quantum expired for process 6.
+ CPU 2: Process 7 is being run.
+ CPU 0: Time quantum expired for process 4.
+ CPU 2: CALC instruction executed on process 7.
+ CPU 1: Process 6 is being run.
+ CPU 1: CALC instruction executed on process 6.
+ CPU 0: Process 4 is being run.
+ CPU 0: CALC instruction executed on process 4.
+Time slot 27
+ CPU 2: Time quantum expired for process 7.
+ CPU 2: Process 7 is being run.
+ CPU 2: CALC instruction executed on process 7.
+ CPU 1: Time quantum expired for process 6.
+ CPU 0: Time quantum expired for process 4.
+ CPU 1: Process 6 is being run.
+ CPU 1: Finished running process 6.
+ CPU 1: stopped.
+ CPU 0: Process 4 is being run.
+ CPU 0: Finished running process 4.
+ CPU 0: stopped.
+Time slot 28
+ CPU 2: Time quantum expired for process 7.
+ CPU 2: Process 7 is being run.
+ CPU 2: CALC instruction executed on process 7.
+Time slot 29
+ CPU 2: Time quantum expired for process 7.
+ CPU 2: Process 7 is being run.
+ CPU 2: CALC instruction executed on process 7.
+Time slot 30
+ CPU 2: Time quantum expired for process 7.
+ CPU 2: Process 7 is being run.
+ CPU 2: Finished running process 7.
+ CPU 2: stopped.
+Timer 0: All events finished.
+Shutting down CPU 0...
+Shutting down timer 0...
+Timer 2: All events finished.
+Timer 1: All events finished.
+Shutting down CPU 1...
+Shutting down timer 1...
+Timer 3: All events finished.
+Shutting down CPU 2...
+Shutting down timer 2...
+Shutting down CPU 3...
+Shutting down timer 3...
+Shutting down logger...
+Cleaning up...

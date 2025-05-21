@@ -1,0 +1,10 @@
+2 1  8
+1048576 16777216 0 0 0
+1 input/proc/s4   4
+2 input/proc/s3   3
+4 input/proc/m1s  2
+6 input/proc/s2   3
+7 input/proc/m0s  3
+9 input/proc/p1s  2
+11 input/proc/s0  1
+16 input/proc/s1  0
