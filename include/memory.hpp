@@ -59,6 +59,9 @@ public:
   // int init_memphy(struct memphy_struct *mp, int max_size, int randomflg)
   // int MEMPHY_format(struct memphy_struct *mp, int pagesz)
   memory(int max_size, int page_size);
+  ~memory() { 
+    delete[] storage;
+  }
   // int alloc_pages_range(struct pcb_t *caller, int req_pgnum, struct framephy_struct **frm_lst)
   int get_free_frame();
 
