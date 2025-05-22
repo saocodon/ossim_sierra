@@ -1,6 +1,7 @@
 #include "memory.hpp"
 
-memory::memory(int max_size, int page_size) {
+memory::memory(int max_size, int page_size)
+{
   storage = new char[max_size];
   memset(storage, 0, max_size);
 
@@ -12,7 +13,8 @@ memory::memory(int max_size, int page_size) {
     free_frames.push_back(i);
 }
 
-int memory::get_free_frame() {
+int memory::get_free_frame()
+{
   if (free_frames.empty()) return -1;
   int frame = free_frames.front();
   free_frames.pop_front();

@@ -6,7 +6,8 @@
 #include "loader.hpp"
 #include <iostream>
 
-cpu::cpu(int id, int quantum_time) {
+cpu::cpu(int id, int quantum_time)
+{
   this->id           = id;
   this->quantum_time = quantum_time;
   done               = false;
@@ -16,14 +17,18 @@ cpu::cpu(int id, int quantum_time) {
   pthread_create(&thread, NULL, thread_entry, this);
 }
 
-void* cpu::routine() {
+void* cpu::routine()
+{
   process* proc = nullptr;
   int time_left = 0;
   while (true) {
-    if (proc == nullptr) {
+    if (proc == nullptr)
+    {
       proc = scheduler::get();
-      if (proc == nullptr) {
-        if (done || !loader::good) {
+      if (proc == nullptr)
+      {
+        if (done || !loader::good)
+        {
           logger::log(" CPU " + std::to_string(id) + ": stopped.\n");
           break;
         }
@@ -34,13 +39,14 @@ void* cpu::routine() {
       logger::log(" CPU " + std::to_string(id) + ": Process " + std::to_string(proc->pid) + " is being run.\n");
       time_left = quantum_time; 
     }
-    if (proc->pc == proc->program_size) {
+    if (proc->pc == proc->program_size)
+    {
       // process is finished
       logger::log(" CPU " + std::to_string(id) + ": Finished running process " + std::to_string(proc->pid) + ".\n");
       delete proc;
       proc = nullptr;
 
-      // Check if there is any job, or set done = true.
+      // check if there is any job, or set done = true.
       if (scheduler::empty())
         done = true;
       continue;
@@ -50,7 +56,8 @@ void* cpu::routine() {
     time_left--;
     t.tick();
 
-    if (time_left == 0 && proc != nullptr) {
+    if (time_left == 0 && proc != nullptr)
+    {
       // process done in current time slot
       std::stringstream ss;
       logger::log(" CPU " + std::to_string(id) + ": Time quantum expired for process " + std::to_string(proc->pid) + ".\n");
@@ -62,7 +69,8 @@ void* cpu::routine() {
   pthread_exit(NULL);
 }
 
-int cpu::execute_instruction(process* proc) {
+int cpu::execute_instruction(process* proc)
+{
   if (proc->pc >= proc->program_size) return -100;
   
   instruction ins = proc->program[proc->pc];
@@ -70,7 +78,8 @@ int cpu::execute_instruction(process* proc) {
   
   int result;
 
-  switch (ins.opcode) {
+  switch (ins.opcode)
+  {
     case instruction_opcode::CALC:
       result = calc(proc);
       logger::log(" CPU " + std::to_string(id) + ": CALC instruction executed on process " + std::to_string(proc->pid) + ".\n");
@@ -104,11 +113,13 @@ int cpu::execute_instruction(process* proc) {
   return result;
 }
 
-void* cpu::thread_entry(void* args) {
+void* cpu::thread_entry(void* args)
+{
   return static_cast<cpu*>(args)->routine();
 }
 
-void cpu::halt() {
+void cpu::halt()
+{
   logger::log("Shutting down timer " + std::to_string(id) + "...\n");
   t.unset();
   t.stop();

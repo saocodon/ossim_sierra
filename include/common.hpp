@@ -9,7 +9,8 @@ const int OFFSET_SIZE  = 10; // 10 bits for offset
 const int FLPT_SIZE    = 5;  // 5 bits for address in the first level of page table
 const int SLPT_SIZE    = 5;  // 5 bits for address in the second level of page table
 
-enum class instruction_opcode {
+enum class instruction_opcode
+{
   CALC,
   ALLOC,
   FREE,
@@ -22,7 +23,8 @@ typedef std::pair<unsigned long, unsigned long> memory_region;
 class internal_memory;
 class memory;
 
-struct instruction {
+struct instruction
+{
   instruction_opcode opcode;
   uint32_t           arg0;
   uint32_t           arg1;
@@ -30,7 +32,8 @@ struct instruction {
   uint32_t           arg3;
 };
 
-struct registers_set {
+struct registers_set
+{
   uint32_t a1;
   uint32_t a2;
   uint32_t a3;
@@ -44,7 +47,8 @@ struct registers_set {
   int32_t  flags;
 };
 
-enum class memory_operation {
+enum class memory_operation
+{
   MAP,
   INC,
   SWP,
@@ -52,7 +56,8 @@ enum class memory_operation {
   WRITE
 };
 
-class process {
+class process
+{
   // --------------------------------------------------------------
   // |                          pcb_t                             |
   // --------------------------------------------------------------
@@ -68,15 +73,20 @@ private:
   std::string         path;
   instruction*        program;
   uint32_t            program_size;
-  uint32_t            symbol_table    [10];             // at most 10 local variables can be declared
+  // at most 10 local variables can be declared
+  uint32_t            symbol_table    [10]; 
   uint32_t            registers       [10];
   uint32_t            pc;
-  uint32_t            bp;                               // break pointer
-  memory_region       page_table      [1 << FLPT_SIZE]; // a map which maps level 1 table -> level 2 table in the page table
+  // break pointer
+  uint32_t            bp;
+  // a map which maps level 1 table -> level 2 table in the page table
+  memory_region       page_table      [1 << FLPT_SIZE]; 
 public:
   internal_memory*    memory_system;
 
-  process(memory* ram, memory* swap, std::string path, int dynamic_priority = 0);
+  process(std::string path, memory* ram, memory* swap0,
+          memory* swap1, memory* swap2,
+          memory* swap3, int dynamic_priority);
 
   // system calls
   friend int __memory_mapping   (process*, registers_set*);

@@ -7,7 +7,8 @@
 
 const int MAX_PRIORITY = 140;
 
-class scheduler {
+class scheduler
+{
 private:
   static std::list<process*> ready_queue[MAX_PRIORITY];  // static struct queue_t mlq_ready_queue[MAX_PRIO]
   static pthread_mutex_t lock;                           // static pthread_mutex_t queue_lock

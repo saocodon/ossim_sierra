@@ -16,7 +16,8 @@ const int SYMBOL_TABLE_SIZE = 30;
 
 const memory_region null_region = memory_region(0, 0);
 
-class memory_partition {
+class memory_partition
+{
   // --------------------------------------------------------------
   // |                      vm_area_struct                        |
   // --------------------------------------------------------------
@@ -39,7 +40,8 @@ public:
   }
 };
 
-class memory {
+class memory
+{
   // --------------------------------------------------------------
   // |                   memphy_struct                            |
   // --------------------------------------------------------------
@@ -59,9 +61,7 @@ public:
   // int init_memphy(struct memphy_struct *mp, int max_size, int randomflg)
   // int MEMPHY_format(struct memphy_struct *mp, int pagesz)
   memory(int max_size, int page_size);
-  ~memory() { 
-    delete[] storage;
-  }
+  ~memory() { delete[] storage; }
   // int alloc_pages_range(struct pcb_t *caller, int req_pgnum, struct framephy_struct **frm_lst)
   int get_free_frame();
 
@@ -86,14 +86,16 @@ private:
   bool                        write_to_physical_address (int address, char data);
 
 public:
+  ~internal_memory()          { delete[] pgd; }
+
   // this will be used for referencing RAM and swap
   memory*                     ram;
-  memory*                     swap;
+  memory*                     swap[4];
 
   memory_region               symbol_table[SYMBOL_TABLE_SIZE];    // struct vm_rg_struct symrgtbl[PAGING_MAX_SYMTBL_SIZE]
   std::list<memory_partition> partitions;                         // struct vm_area_struct *mmap
 
-  internal_memory(memory* ram, memory* swap, process* parent);
+  internal_memory(process* parent, memory* ram, memory* swap0, memory* swap1, memory* swap2, memory* swap3);
 
   // struct vm_area_struct *get_vma_by_num(struct mm_struct *mm, int vmaid)
   memory_partition*           get_partition(int index);

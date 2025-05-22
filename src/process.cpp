@@ -3,10 +3,13 @@
 #include <filesystem>
 #include <fstream>
 
-process::process(memory* ram, memory* swap, std::string path, int dynamic_priority) {
+process::process(std::string path, memory* ram, memory* swap0 = nullptr,
+                 memory* swap1 = nullptr, memory* swap2 = nullptr,
+                 memory* swap3 = nullptr, int dynamic_priority = 0) {
   this->path = path;
   good = true;
-  if (!std::filesystem::exists(path)) {
+  if (!std::filesystem::exists(path))
+  {
     good = false;
     return;
   }
@@ -16,7 +19,8 @@ process::process(memory* ram, memory* swap, std::string path, int dynamic_priori
   this->priority = dynamic_priority;
 
   program = new instruction[program_size];
-  for (int i = 0; i < program_size; i++) {
+  for (int i = 0; i < program_size; i++)
+  {
     std::string opcode;
     stream >> opcode;
     
@@ -27,7 +31,8 @@ process::process(memory* ram, memory* swap, std::string path, int dynamic_priori
     if (opcode == "write")   program[i].opcode = instruction_opcode::WRITE;
     if (opcode == "syscall") program[i].opcode = instruction_opcode::SYSCALL;
 
-    switch (program[i].opcode) {
+    switch (program[i].opcode)
+    {
       case instruction_opcode::CALC:                                                                                        break;
       case instruction_opcode::ALLOC:   stream >> program[i].arg0 >> program[i].arg1;                                       break; 
       case instruction_opcode::FREE:    stream >> program[i].arg0;                                                          break;
@@ -39,5 +44,5 @@ process::process(memory* ram, memory* swap, std::string path, int dynamic_priori
   }
 
   this->pc = this->bp = 0;
-  memory_system = new internal_memory(ram, swap, this);
+  memory_system = new internal_memory(this, ram, swap0, swap1, swap2, swap3);
 }

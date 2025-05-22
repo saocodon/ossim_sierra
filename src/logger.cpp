@@ -7,23 +7,28 @@ std::mutex              logger::mtx;
 std::condition_variable logger::cv;
 bool                    logger::done = false;
 
-void logger::run() {
+void logger::run()
+{
   std::unique_lock<std::mutex> lock(mtx);
-  while (!done) {
+  while (!done)
+  {
     cv.wait(lock, [] { return !messages.empty() || done; });
-    while (!messages.empty()) {
+    while (!messages.empty())
+    {
       std::cout << messages.front();
       messages.pop();
     }
   }
 }
 
-void logger::start() {
+void logger::start()
+{
   done = false;
   t = std::thread(run);
 }
 
-void logger::log(const std::string message) {
+void logger::log(const std::string message)
+{
   {
     std::lock_guard<std::mutex> lock(mtx);
     messages.push(message);
@@ -31,7 +36,8 @@ void logger::log(const std::string message) {
   cv.notify_one();
 }
 
-void logger::stop() {
+void logger::stop()
+{
   {
     std::lock_guard<std::mutex> lock(mtx);
     done = true;
@@ -39,7 +45,8 @@ void logger::stop() {
   cv.notify_all();
 }
 
-void logger::join() {
+void logger::join()
+{
   if (t.joinable())
     t.join();
 }

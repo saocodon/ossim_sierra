@@ -5,7 +5,8 @@
 #include <stdint.h>
 #include <list>
 
-class timer {
+class timer
+{
 private:
   bool                   started;                    // int timer_started
                                                      // int timer_stopped
@@ -40,7 +41,8 @@ public:
   ~timer();
 };
 
-class timer_manager {
+class timer_manager
+{
 public:
   // make the list thread-safe (ensure initialization)
   static std::list<timer*>& get_list() {

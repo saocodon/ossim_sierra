@@ -1,0 +1,7 @@
+#ifndef KERNEL_CONFIG_HPP
+#define KERNEL_CONFIG_HPP
+
+// #define USE_DEFAULT_MEMORY_CONFIGURATION
+// #define PRINT_PGD
+
+#endif

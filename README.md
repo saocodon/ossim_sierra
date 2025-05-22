@@ -5,7 +5,6 @@ This is a ported version of the assignment (written in C) with the following cha
 - Use LLVM/Clang and CMake instead of GNU C Compiler (GCC) and GNU Make.
 - Written using object-oriented programming (OOP).
 - Make use of the Standard Template Library (STL) of C++ for data structures.
-- Currently only support only one swap memory.
 - By default use paging on memory, multi-level queue (MLQ) on CPU scheduling.
 - Configuration file format has few changes listed below.
 

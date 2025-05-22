@@ -8,7 +8,8 @@
 #include <mutex>
 #include <condition_variable>
 
-class logger {
+class logger
+{
 private:
   static std::queue<std::string> messages;
   static std::thread             t;

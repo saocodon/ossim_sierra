@@ -5,12 +5,14 @@
 
 uint64_t timer::time = 0;
 
-struct timer_args {
+struct timer_args
+{
   timer* self;
   void*  args;
 };
 
-timer::timer() {
+timer::timer()
+{
   started = 0; done = 0; fsh = 0; time = 0;
   pthread_cond_init(&event_condition, NULL);
   pthread_mutex_init(&event_lock, NULL);
@@ -19,19 +21,22 @@ timer::timer() {
   set();
 }
 
-timer::~timer() {
+timer::~timer()
+{
   pthread_cond_destroy(&event_condition);
   pthread_mutex_destroy(&event_lock);
   pthread_cond_destroy(&timer_condition);
   pthread_mutex_destroy(&timer_lock);
 }
 
-void timer::start(void* raw_args) {
+void timer::start(void* raw_args)
+{
   started = true;
   pthread_create(&thread, NULL, timer::thread_entry, new timer_args { this, raw_args });
 }
 
-void timer::stop() {
+void timer::stop()
+{
   started = false;
 
   // Fire up the last CPU burst so the timer can exit the deadlock
@@ -45,19 +50,22 @@ void timer::stop() {
   pthread_join(thread, NULL);
 }
 
-void timer::set() {
+void timer::set()
+{
   if (started) return;
   timer_manager::get_list().push_front(this);
 }
 
-void timer::unset() {
+void timer::unset()
+{
   pthread_mutex_lock(&event_lock);
   fsh = 1;
   pthread_cond_signal(&event_condition);
   pthread_mutex_unlock(&event_lock);
 }
 
-void* timer::routine(void* args) {
+void* timer::routine(void* args)
+{
   while (started) {
     std::stringstream ss;
     ss << "Time slot " << time << "\n";
@@ -90,7 +98,8 @@ void* timer::routine(void* args) {
   pthread_exit(args);
 }
 
-void timer::tick() {
+void timer::tick()
+{
   pthread_mutex_lock(&event_lock);
   done = 1;
   pthread_cond_signal(&event_condition);
@@ -103,7 +112,8 @@ void timer::tick() {
   pthread_mutex_unlock(&timer_lock);
 }
 
-void* timer::thread_entry(void* args) {
+void* timer::thread_entry(void* args)
+{
   timer_args* t_args   = static_cast<timer_args*>(args);
   timer*      self     = t_args->self;
   void*       raw_args = t_args->args;

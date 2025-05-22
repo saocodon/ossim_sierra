@@ -4,13 +4,15 @@
 #include <string>
 #include <vector>
 
-struct process_info {
+struct process_info
+{
   uint64_t arrival_time;
   std::string path;
   int priority;
 };
 
-class configuration {
+class configuration
+{
 private:
   static int                       free_pid;                        // static int avail_pid
 

@@ -4,7 +4,8 @@
 #include "timer.hpp"
 #include "scheduler.hpp"
 
-class cpu {
+class cpu
+{
 private:
   timer      t;
   int        id;
